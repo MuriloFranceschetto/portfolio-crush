@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Murilo · Serviços Exclusivos</title>
+<meta name="description" content="Prestador de serviços de rolês, bolos, moto e escuta ativa. Agenda aberta para uma cliente exclusiva.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Murilo · Serviços Exclusivos">
+<meta property="og:description" content="Agenda aberta para uma cliente exclusiva. Solicite seu orçamento.">
+<meta name="theme-color" content="#D92D6B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23151A33'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='36' font-weight='700' fill='%23fff' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: proposta comercial de uma coluna, cards só onde é "documento oficial", carimbos rosa como acento */
+:root{
+  --bg:#F3F4F8; --surface:#FFFFFF; --ink:#151A33; --muted:#5B6079; --line:#DDE0EA;
+  --accent:#D92D6B; --accent-soft:#FCE4EE; --ok:#1E9E84; --ok-soft:#DDF4EE;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Inter", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1224; --surface:#181C33; --ink:#ECEEF7; --muted:#9EA3BF; --line:#2A2F4B;
+    --accent:#FF5C93; --accent-soft:#3A1A2C; --ok:#4FD1B3; --ok-soft:#12352F; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1224; --surface:#181C33; --ink:#ECEEF7; --muted:#9EA3BF; --line:#2A2F4B;
+  --accent:#FF5C93; --accent-soft:#3A1A2C; --ok:#4FD1B3; --ok-soft:#12352F; color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body);
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.wrap{max-width:880px;margin:0 auto;padding-block:32px 64px;display:flex;flex-direction:column;gap:72px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+.label{font:600 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.section{display:flex;flex-direction:column;gap:24px}
+.section-head{display:flex;flex-direction:column;gap:8px}
+.section-head p{color:var(--muted);max-width:60ch}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+/* topo */
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  font:500 .8rem/1 var(--mono);color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:16px}
+.status{display:inline-flex;align-items:center;gap:8px;background:var(--ok-soft);color:var(--ok);padding:6px 10px;border-radius:999px;font-weight:600}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.35}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.avatar{width:132px;height:132px;border-radius:28px;background:var(--ink);color:var(--bg);display:grid;place-items:center;
+  font:800 3.2rem/1 var(--display);position:relative}
+.avatar .stamp{position:absolute;right:-14px;bottom:-12px;background:var(--accent);color:#fff;font:600 .62rem/1.2 var(--mono);
+  letter-spacing:.08em;padding:6px 8px;border-radius:6px;transform:rotate(-8deg);text-transform:uppercase}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .role{font:500 1.1rem/1.4 var(--body);color:var(--muted);margin-top:10px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn{appearance:none;border:2px solid var(--ink);background:var(--ink);color:var(--bg);font:600 .95rem/1 var(--body);
+  padding:14px 20px;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.pink{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (max-width:560px){.hero{grid-template-columns:1fr}.avatar{width:104px;height:104px;font-size:2.6rem}}
+
+/* resumo */
+.summary{font:500 clamp(1.15rem,2.6vw,1.4rem)/1.5 var(--body);max-width:62ch}
+.summary mark{background:var(--accent-soft);color:var(--ink);padding:0 4px;border-radius:4px}
+
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.kpi{background:var(--surface);padding:20px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.kpi b{font:800 2rem/1 var(--display);font-variant-numeric:tabular-nums}
+.kpi span{font-size:.85rem;color:var(--muted)}
+@media (max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}}
+
+/* experiência */
+.timeline{display:flex;flex-direction:column;border-left:2px solid var(--line);margin-left:6px}
+.job{position:relative;padding:0 0 28px 28px;display:flex;flex-direction:column;gap:6px}
+.job:last-child{padding-bottom:0}
+.job::before{content:"";position:absolute;left:-8px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--ink)}
+.job.current::before{border-color:var(--accent);background:var(--accent)}
+.job .when{font:500 .78rem/1 var(--mono);color:var(--muted)}
+.job p{color:var(--muted);max-width:62ch}
+.job ul{margin:4px 0 0;padding-left:18px;color:var(--ink)}
+.job li{margin:2px 0}
+
+/* skills */
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px}
+.skill{display:flex;flex-direction:column;gap:8px;min-width:0}
+.skill-top{display:flex;justify-content:space-between;gap:8px;font-weight:600}
+.skill-top small{font:500 .78rem/1.4 var(--mono);color:var(--muted)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ink);border-radius:99px}
+.skill.top .bar i{background:var(--accent)}
+@media (max-width:620px){.skills{grid-template-columns:1fr}}
+
+/* benefícios */
+.perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.perk{border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px;background:var(--surface)}
+.perk .code{font:600 .7rem/1 var(--mono);color:var(--accent);letter-spacing:.08em}
+.perk p{color:var(--muted);font-size:.95rem}
+.perk .price{margin-top:auto;padding-top:8px;border-top:1px dashed var(--line);font:600 .8rem/1.4 var(--mono);color:var(--ink)}
+.stars{color:var(--accent);letter-spacing:.15em;font-size:1rem}
+
+/* recomendações */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.quote{display:flex;flex-direction:column;gap:12px;min-width:0}
+.quote blockquote{margin:0;font:500 1.05rem/1.5 var(--body)}
+.quote cite{font:500 .8rem/1.3 var(--mono);color:var(--muted);font-style:normal}
+@media (max-width:720px){.quotes{grid-template-columns:1fr}}
+
+/* formulário */
+.form-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,36px);display:flex;flex-direction:column;gap:28px}
+.form-card .doc-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-bottom:1px dashed var(--line);padding-bottom:16px}
+fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+legend,.q{font:600 1rem/1.4 var(--body);padding:0;margin-bottom:10px}
+legend small,.q small{display:block;font-weight:400;color:var(--muted);font-size:.85rem}
+input[type=text],textarea,select{width:100%;font:400 1rem/1.4 var(--body);color:var(--ink);background:var(--bg);
+  border:1.5px solid var(--line);border-radius:10px;padding:12px 14px}
+input[type=text]:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+textarea{min-height:96px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:inline-block;padding:10px 14px;border:1.5px solid var(--line);border-radius:999px;font-size:.92rem;cursor:pointer;transition:all .15s;user-select:none}
+.chip input:checked + span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip input:focus-visible + span{outline:3px solid var(--accent);outline-offset:2px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.scale .chip span{display:block;text-align:center;border-radius:10px;padding:12px 4px}
+.scale-legend{display:flex;justify-content:space-between;font:400 .75rem/1.2 var(--mono);color:var(--muted)}
+.final-q{display:flex;gap:12px;flex-wrap:wrap;align-items:center;min-height:56px;position:relative}
+#btn-nao{transition:transform .2s ease}
+.final-q .chip input:checked + span{background:var(--accent);border-color:var(--accent);color:#fff}
+.nao-msg{font:400 .8rem/1.3 var(--mono);color:var(--muted)}
+.submit-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.err{color:var(--accent);font-size:.9rem}
+
+.result{display:flex;flex-direction:column;gap:16px}
+.result .approved{align-self:flex-start;border:3px solid var(--ok);color:var(--ok);font:800 1.4rem/1 var(--display);
+  padding:10px 16px;border-radius:8px;transform:rotate(-3deg);text-transform:uppercase;letter-spacing:.04em}
+.result pre{white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px;
+  font:400 .85rem/1.5 var(--mono);margin:0;max-height:320px;overflow:auto}
+.result .note{color:var(--muted);font-size:.9rem}
+
+footer{font:400 .78rem/1.5 var(--mono);color:var(--muted);text-align:center;border-top:1px solid var(--line);padding-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span>PROPOSTA COMERCIAL Nº 2026-CRUSH · VÁLIDA POR TEMPO LIMITADO</span>
+    <span class="status">Agenda aberta</span>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="avatar" aria-hidden="true">M<span class="stamp">Atendimento exclusivo</span></div>
+    <div>
+      <p class="label">Portfólio de serviços</p>
+      <h1>Murilo</h1>
+      <p class="role">Prestador de serviços em rolês, bolos, moto e escuta ativa · Atendimento presencial ou na garupa</p>
+      <div class="hero-actions">
+        <a class="btn pink" href="#entrevista">Solicitar orçamento</a>
+        <a class="btn ghost" href="#servicos">Ver serviços</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- RESUMO -->
+  <section class="section" aria-labelledby="sobre">
+    <div class="section-head"><p class="label" id="sobre">Sobre o prestador</p></div>
+    <p class="summary">
+      Ofereço soluções completas em <mark>esportes</mark>, <mark>academia</mark> e
+      <mark>passeios de moto</mark>. Entrego <mark>bolos caseiros</mark> dentro do prazo, topo qualquer rolê
+      sem burocracia e meus clientes me avaliam como <mark>ótimo ouvinte</mark>.
+      Trabalho com atendimento personalizado e dedicação exclusiva: uma cliente só (você).
+    </p>
+  </section>
+
+  <!-- KPIs -->
+  <section class="section" aria-labelledby="resultados">
+    <div class="section-head"><p class="label" id="resultados">Indicadores de qualidade do serviço</p></div>
+    <div class="kpis">
+      <div class="kpi"><b>100%</b><span>dos rolês agendados foram entregues</span></div>
+      <div class="kpi"><b>5x</b><span>academia por semana, sem pular perna</span></div>
+      <div class="kpi"><b>0</b><span>reclamações sobre os bolos</span></div>
+      <div class="kpi"><b>&lt;5min</b><span>tempo médio de atendimento no zap</span></div>
+    </div>
+  </section>
+
+  <!-- EXPERIÊNCIA -->
+  <section class="section" id="servicos" aria-labelledby="exp">
+    <div class="section-head">
+      <p class="label">Catálogo</p>
+      <h2 id="exp">Serviços oferecidos</h2>
+    </div>
+    <div class="timeline">
+      <div class="job current">
+        <span class="when">PLANO PREMIUM · VAGA ÚNICA</span>
+        <h3>Pacote Completo de Companhia</h3>
+        <p>Todos os serviços abaixo num contrato só. Disponível para uma única cliente, com início imediato.</p>
+      </div>
+      <div class="job">
+        <span class="when">ESPORTES · ACADEMIA</span>
+        <h3>Histórico de atleta</h3>
+        <ul>
+          <li>Gosta muito de esporte, seja pra jogar, assistir ou só bater uma bola</li>
+          <li>Frequenta academia e curte manter a rotina de treino</li>
+          <li>Topa companhia nos treinos ou num jogo qualquer, sem cobrança de desempenho</li>
+        </ul>
+      </div>
+      <div class="job">
+        <span class="when">LOGÍSTICA · DUAS RODAS</span>
+        <h3>Transporte Executivo de Moto</h3>
+        <ul>
+          <li>Carona grátis, sem taxa e sem tarifa dinâmica</li>
+          <li>Rotas cênicas, pôr do sol e vento na cara</li>
+          <li>Capacete extra incluso e direção responsável, porque a carga é preciosa</li>
+        </ul>
+      </div>
+      <div class="job">
+        <span class="when">SUPORTE · 24/7</span>
+        <h3>Comunicativo</h3>
+        <ul>
+          <li>Fala de qualquer assunto, do mais sério à fofoca mais aleatória</li>
+          <li>Escuta ativa premium: ouve sem interromper e lembra dos detalhes que você contou semana passada</li>
+          <li>Disponível para desabafos, debates e áudios de 4+ minutos</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPETÊNCIAS -->
+  <section class="section" id="competencias" aria-labelledby="comp">
+    <div class="section-head">
+      <p class="label">Qualificações</p>
+      <h2 id="comp">Capacidade técnica</h2>
+      <p>Autoavaliação do prestador. Certificação pendente da avaliação da cliente (você).</p>
+    </div>
+    <div class="skills">
+      <div class="skill top"><div class="skill-top">Escuta ativa <small>nível máximo</small></div><div class="bar"><i style="width:100%"></i></div></div>
+      <div class="skill top"><div class="skill-top">Topar rolê <small>nível máximo</small></div><div class="bar"><i style="width:100%"></i></div></div>
+      <div class="skill"><div class="skill-top">Esportes <small>avançado</small></div><div class="bar"><i style="width:94%"></i></div></div>
+      <div class="skill"><div class="skill-top">Academia <small>avançado</small></div><div class="bar"><i style="width:92%"></i></div></div>
+      <div class="skill"><div class="skill-top">Pilotagem defensiva <small>(a melhor defesa é um bom ataque)</small></div><div class="bar"><i style="width:50%"></i></div></div>
+      <div class="skill"><div class="skill-top">Fazer bolo <small>avançado</small></div><div class="bar"><i style="width:88%"></i></div></div>
+      <div class="skill"><div class="skill-top">Escolher filme rápido <small>em desenvolvimento</small></div><div class="bar"><i style="width:35%"></i></div></div>
+      <div class="skill"><div class="skill-top">Ficar sem te mandar mensagem <small>em desenvolvimento</small></div><div class="bar"><i style="width:12%"></i></div></div>
+    </div>
+  </section>
+
+  <!-- BENEFÍCIOS -->
+  <section class="section" aria-labelledby="ben">
+    <div class="section-head">
+      <p class="label">Tabela de preços</p>
+      <h2 id="ben">O que está incluso no seu plano</h2>
+    </div>
+    <div class="perks">
+      <div class="perk"><span class="code">VG-01</span><h3>Vale-garupa</h3><p>Passeios de moto ilimitados. Capacete incluso, destino à sua escolha.</p><span class="price">Investimento: segurar firme</span></div>
+      <div class="perk"><span class="code">VB-02</span><h3>Vale-bolo</h3><p>Bolo caseiro sob demanda, sem taxa de entrega e com cobertura generosa.</p><span class="price">Investimento: dizer que ficou bom</span></div>
+      <div class="perk"><span class="code">PR-03</span><h3>Plano de rolês ilimitado</h3><p>Barzinho, trilha, cinema, show ou sofá. Sem carência e sem multa.</p><span class="price">Investimento: sua companhia</span></div>
+      <div class="perk"><span class="code">SE-04</span><h3>Suporte emocional 24/7</h3><p>Ouvinte dedicado com SLA de resposta rápido e zero julgamento.</p><span class="price">Investimento: me contar tudo</span></div>
+      <div class="perk"><span class="code">PT-05</span><h3>Personal trainer</h3><p>Treino a dois, com motivação e elogios inclusos no pacote.</p><span class="price">Investimento: não desistir no agachamento</span></div>
+      <div class="perk"><span class="code">CC-06</span><h3>Carregador de sacolas</h3><p>Benefício direto do item PT-05.</p><span class="price">Investimento: grátis</span></div>
+    </div>
+  </section>
+
+  <!-- RECOMENDAÇÕES -->
+  <section class="section" aria-labelledby="rec">
+    <div class="section-head">
+      <p class="label">Prova social</p>
+      <h2 id="rec">Avaliações de clientes</h2>
+    </div>
+    <div class="quotes">
+      <div class="quote"><span class="stars" aria-label="5 estrelas">★★★★★</span><blockquote>“Um menino de ouro. Come direitinho e ainda faz bolo.”</blockquote><cite>Mãe dele · Cliente desde o nascimento</cite></div>
+      <div class="quote"><span class="stars" aria-label="5 estrelas">★★★★★</span><blockquote>“Nunca falta, sempre educado.”</blockquote><cite>Recepção da academia · Cliente corporativo</cite></div>
+      <div class="quote"><span class="stars" aria-label="5 estrelas">★★★★★</span><blockquote>“Vrum vrum. Me trata com carinho e me leva pra lugares bonitos.”</blockquote><cite>A moto dele · Usuária frequente do serviço</cite></div>
+    </div>
+  </section>
+
+  <!-- FORMULÁRIO -->
+  <section class="section" id="entrevista" aria-labelledby="form-title">
+    <div class="section-head">
+      <p class="label">Contratação</p>
+      <h2 id="form-title">Solicitação de orçamento</h2>
+      <p>Leva 1 minuto. Seu pedido vai direto para o prestador, que responde rapidinho.</p>
+    </div>
+
+    <form class="form-card" id="form" novalidate>
+      <div class="doc-head">
+        <span class="label">Ordem de serviço · OS-2026-❤</span>
+        <span class="label">Cliente: você</span>
+      </div>
+
+      <fieldset>
+        <label class="q" for="nome">Nome da cliente</label>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome" autocomplete="given-name" required>
+      </fieldset>
+
+      <fieldset>
+        <legend>Nota para o atendimento até agora<small>Seja honesta. O prestador aguenta.</small></legend>
+        <div class="scale">
+          <label class="chip"><input type="radio" name="nota" value="1 - Ainda avaliando" id="nota1"><span>1</span></label>
+          <label class="chip"><input type="radio" name="nota" value="2 - Mediano" id="nota2"><span>2</span></label>
+          <label class="chip"><input type="radio" name="nota" value="3 - Promissor" id="nota3"><span>3</span></label>
+          <label class="chip"><input type="radio" name="nota" value="4 - Muito bom" id="nota4"><span>4</span></label>
+          <label class="chip"><input type="radio" name="nota" value="5 - Cliente fidelizada" id="nota5"><span>5</span></label>
+        </div>
+        <div class="scale-legend"><span>ainda avaliando</span><span>cliente fidelizada</span></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Quais serviços você quer contratar primeiro?<small>Pode marcar vários.</small></legend>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="beneficios" value="Passeio de moto" id="b1"><span>Passeio de moto</span></label>
+          <label class="chip"><input type="checkbox" name="beneficios" value="Bolo caseiro" id="b2"><span>Bolo caseiro</span></label>
+          <label class="chip"><input type="checkbox" name="beneficios" value="Rolê" id="b3"><span>Um rolê</span></label>
+          <label class="chip"><input type="checkbox" name="beneficios" value="Treino juntos" id="b4"><span>Treino juntos</span></label>
+          <label class="chip"><input type="checkbox" name="beneficios" value="Conversa longa" id="b5"><span>Conversa longa</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Rolê ideal para o primeiro atendimento</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="role" value="Barzinho" id="r1"><span>Barzinho</span></label>
+          <label class="chip"><input type="radio" name="role" value="Comida boa" id="r2"><span>Comida boa</span></label>
+          <label class="chip"><input type="radio" name="role" value="Cinema" id="r3"><span>Cinema</span></label>
+          <label class="chip"><input type="radio" name="role" value="Pôr do sol de moto" id="r4"><span>Pôr do sol de moto</span></label>
+          <label class="chip"><input type="radio" name="role" value="Trilha / natureza" id="r5"><span>Trilha</span></label>
+          <label class="chip"><input type="radio" name="role" value="Show / festa" id="r6"><span>Show ou festa</span></label>
+          <label class="chip"><input type="radio" name="role" value="Café e conversa" id="r7"><span>Café e conversa</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Melhor dia para agendar o serviço<small>Pode marcar vários.</small></legend>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="dias" value="Seg" id="d1"><span>Seg</span></label>
+          <label class="chip"><input type="checkbox" name="dias" value="Ter" id="d2"><span>Ter</span></label>
+          <label class="chip"><input type="checkbox" name="dias" value="Qua" id="d3"><span>Qua</span></label>
+          <label class="chip"><input type="checkbox" name="dias" value="Qui" id="d4"><span>Qui</span></label>
+          <label class="chip"><input type="checkbox" name="dias" value="Sex" id="d5"><span>Sex</span></label>
+          <label class="chip"><input type="checkbox" name="dias" value="Sáb" id="d6"><span>Sáb</span></label>
+          <label class="chip"><input type="checkbox" name="dias" value="Dom" id="d7"><span>Dom</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <label class="q" for="musica">Uma música que você ama<small>Pra playlist da garupa.</small></label>
+        <input type="text" id="musica" name="musica" placeholder="Artista - música">
+      </fieldset>
+
+      <fieldset>
+        <label class="q" for="comentarios">Observações para o prestador<small>Pedidos especiais, exigências, cláusulas contratuais…</small></label>
+        <textarea id="comentarios" name="comentarios" placeholder="Escreva aqui"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>Fechamos negócio? Posso agendar o primeiro encontro?</legend>
+        <div class="final-q" id="final-q">
+          <label class="chip"><input type="radio" name="parecer" value="Fechado, pode agendar" id="p-sim"><span>Fechado, pode agendar</span></label>
+          <label class="chip"><input type="radio" name="parecer" value="Quero uma demonstração grátis antes" id="p-talvez"><span>Quero uma demonstração grátis antes</span></label>
+          <button type="button" class="btn ghost" id="btn-nao">Não</button>
+        </div>
+        <span class="nao-msg" id="nao-msg" hidden>Cancelamento indisponível no momento. Tente as outras opções.</span>
+      </fieldset>
+
+      <div class="submit-row">
+        <button type="submit" class="btn pink" id="enviar">Contratar serviço</button>
+        <span class="err" id="err" role="alert"></span>
+      </div>
+    </form>
+
+    <div class="form-card result" id="result" hidden>
+      <span class="approved">Pedido confirmado</span>
+      <h3 id="result-title">Obrigado!</h3>
+      <p class="note" id="result-note"></p>
+      <pre id="resumo"></pre>
+      <div class="submit-row">
+        <a class="btn pink" id="btn-zap" href="#" target="_blank" rel="noopener">Enviar pro Murilo no WhatsApp</a>
+        <button type="button" class="btn ghost" id="btn-copy">Copiar respostas</button>
+        <span class="note" id="copy-msg"></span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Murilo · Serviços Exclusivos · Atendimento sujeito à disponibilidade (que é total).
+  </footer>
+</div>
+
+<script>
+/* ===== CONFIGURAÇÃO (edite aqui) =====
+   whatsapp: seu número com DDI + DDD, só dígitos. Ex.: "5511999998888".
+             Vazio = abre o WhatsApp pra ela escolher o contato.
+   formspree: ID do seu formulário em formspree.io (ex.: "xkgwabcd").
+             Com ele preenchido, as respostas chegam no seu e-mail
+             automaticamente e ficam salvas no painel do Formspree. */
+const CONFIG = { whatsapp: "5546935050940", formspree: "xoqbvrwe" };
+
+const form = document.getElementById('form');
+const err = document.getElementById('err');
+
+/* Botão "Não" fugitivo */
+const nao = document.getElementById('btn-nao');
+const naoMsg = document.getElementById('nao-msg');
+let fugas = 0;
+function foge(e){
+  if (e) e.preventDefault();
+  fugas++;
+  const box = document.getElementById('final-q').getBoundingClientRect();
+  const maxX = Math.max(40, box.width - nao.offsetWidth);
+  const x = Math.random() * maxX - nao.offsetLeft;
+  const y = (Math.random() * 80 - 40);
+  nao.style.transform = `translate(${x}px, ${y}px)`;
+  if (fugas >= 3) naoMsg.hidden = false;
+  if (fugas >= 6) { nao.textContent = 'Não (indisponível)'; nao.disabled = true; }
+}
+nao.addEventListener('mouseenter', foge);
+nao.addEventListener('touchstart', foge, {passive:false});
+nao.addEventListener('click', foge);
+
+function valores(){
+  const fd = new FormData(form);
+  return {
+    nome: (fd.get('nome') || '').trim(),
+    nota: fd.get('nota') || '—',
+    beneficios: fd.getAll('beneficios').join(', ') || '—',
+    role: fd.get('role') || '—',
+    dias: fd.getAll('dias').join(', ') || '—',
+    musica: (fd.get('musica') || '').trim() || '—',
+    comentarios: (fd.get('comentarios') || '').trim() || '—',
+    parecer: fd.get('parecer') || '—'
+  };
+}
+
+function texto(v){
+  return `NOVO PEDIDO DE SERVIÇO · OS-2026\n\n` +
+    `Cliente: ${v.nome}\n` +
+    `Nota do atendimento: ${v.nota}\n` +
+    `Serviços contratados: ${v.beneficios}\n` +
+    `Rolê ideal: ${v.role}\n` +
+    `Melhores dias: ${v.dias}\n` +
+    `Música: ${v.musica}\n` +
+    `Observações: ${v.comentarios}\n` +
+    `Fechamento: ${v.parecer}`;
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const v = valores();
+  if (!v.nome) { err.textContent = 'Preencha seu nome para o prestador saber quem é a cliente.'; document.getElementById('nome').focus(); return; }
+  if (v.parecer === '—') { err.textContent = 'Falta responder se fechamos negócio.'; return; }
+  err.textContent = '';
+
+  const msg = texto(v);
+  const btn = document.getElementById('enviar');
+  btn.disabled = true; btn.textContent = 'Enviando…';
+
+  let salvo = false;
+  if (CONFIG.formspree) {
+    try {
+      const r = await fetch('https://formspree.io/f/' + CONFIG.formspree, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...v, _subject: 'Novo pedido de serviço: ' + v.nome })
+      });
+      salvo = r.ok;
+    } catch (_) { salvo = false; }
+  }
+
+  document.getElementById('resumo').textContent = msg;
+  document.getElementById('result-title').textContent = `Obrigado, ${v.nome}!`;
+  document.getElementById('result-note').textContent = salvo
+    ? 'Seu pedido já chegou para o prestador. Se quiser, manda também pelo WhatsApp pra furar a fila (que não existe).'
+    : 'Último passo: toque no botão abaixo pra enviar seu pedido pelo WhatsApp.';
+  const base = CONFIG.whatsapp ? 'https://wa.me/' + CONFIG.whatsapp : 'https://wa.me/';
+  document.getElementById('btn-zap').href = base + '?text=' + encodeURIComponent(msg);
+
+  form.hidden = true;
+  const res = document.getElementById('result');
+  res.hidden = false;
+  res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+document.getElementById('btn-copy').addEventListener('click', async () => {
+  const t = document.getElementById('resumo').textContent;
+  const out = document.getElementById('copy-msg');
+  try { await navigator.clipboard.writeText(t); out.textContent = 'Copiado.'; }
+  catch (_) {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('resumo'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    out.textContent = 'Texto selecionado. Use Ctrl+C para copiar.';
+  }
+});
+</script>
+</body>
+</html>
