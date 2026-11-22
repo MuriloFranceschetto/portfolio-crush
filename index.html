@@ -431,9 +431,40 @@ function foge(e){
   if (fugas >= 3) naoMsg.hidden = false;
   if (fugas >= 6) { nao.textContent = 'Não (indisponível)'; nao.disabled = true; }
 }
-nao.addEventListener('mouseenter', foge);
-nao.addEventListener('touchstart', foge, {passive:false});
-nao.addEventListener('click', foge);
+/* Celular: o "Não" encolhe, o "Fechado" cresce e o prestador argumenta */
+const simSpan = document.querySelector('#p-sim + span');
+const etapas = [
+  ['Tem certeza?', 'Cliente, recomendamos reler a cláusula 4.2 do contrato.'],
+  ['Certeza mesmo?', 'O prestador está passando por um momento delicado.'],
+  ['Pensa na garupa', 'Cancelamento sujeito a multa de 1 (um) pôr do sol de moto não visto.'],
+  ['Última chance', 'Seu pedido foi encaminhado ao setor de reconsideração.'],
+  ['Erro 404', 'Opção "Não" não encontrada no sistema.']
+];
+let tentativas = 0;
+function argumenta(e){
+  e.preventDefault();
+  if (tentativas >= etapas.length) {
+    nao.hidden = true;
+    naoMsg.textContent = 'O botão "Não" pediu demissão. Restam as outras opções.';
+    simSpan.style.fontSize = '1.25rem';
+    return;
+  }
+  const [rotulo, msg] = etapas[tentativas];
+  tentativas++;
+  nao.textContent = rotulo;
+  nao.style.transform = `scale(${1 - tentativas * 0.12})`;
+  simSpan.style.fontSize = (0.92 + tentativas * 0.08) + 'rem';
+  naoMsg.textContent = msg;
+  naoMsg.hidden = false;
+}
+
+if (matchMedia('(hover: none)').matches) {
+  nao.addEventListener('click', argumenta);
+} else {
+  nao.addEventListener('mouseenter', foge);
+  nao.addEventListener('touchstart', foge, {passive:false});
+  nao.addEventListener('click', foge);
+}
 
 function valores(){
   const fd = new FormData(form);
